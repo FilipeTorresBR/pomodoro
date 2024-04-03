@@ -1,0 +1,25 @@
+:root{
+    --primary-color: #333;
+    --secondary-color: #222;
+}
+
+input[readonly]{
+    background-color: #ddd;
+}
+input[type="number"]{
+   
+    font-size: 22px;
+    text-align: center;
+}
+.background_primary{
+    background-color: var(--primary-color);
+}
+.background_secondary{
+    background-color: var(--secondary-color);
+}
+.container-timer{
+    padding: 50px 0;
+}
+.text-timer{
+    font-size: 60px;
+}
