@@ -28,8 +28,8 @@
             <div class="col-md-6 bs-primary">
                 <div class="row">
                     <div class="d-grid gap-3 d-md-block" role="group" aria-label="Basic example">
-                        <button type="button" id="pomodoro-mode" onclick="setMode('pomodoro')" class="btn btn-outline-primary active">Pomodoro</button>
-                        <button type="button" id="break-mode" onclick="setMode('break')" class="btn btn-outline-success ">Descanso</button>
+                        <button type="button" id="pomodoro-mode" onclick="setMode('pomodoro')" class="btn btn-primary active">Pomodoro</button>
+                        <button type="button" id="break-mode" onclick="setMode('break')" class="btn btn-success">Descanso</button>
                     </div>
                 </div>
                 <div class="row">
@@ -43,7 +43,7 @@
                         <span class="text-white text-timer" data-onload="pomodoro_seconds" id="span_pomodoro_seconds"></span>
                     </div>
                 </div>
-                <input type="submit" id="button" class="form-control" onclick="startTimer()" value="Play"></button>
+                <input type="submit" id="button" class="form-control" onclick="setState()" value="Play"></button>
             </div>
         </div>
     </main>

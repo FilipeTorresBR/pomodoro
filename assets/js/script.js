@@ -1,12 +1,11 @@
-var state = "";
+var state = "pause";
 var mode = "pomodoro";  
 var timer;
 function startTimer() {
-    minutes = $('#span_pomodoro_minutes');
-    seconds = $('#span_pomodoro_seconds');
+    minutes = $('#span_'+mode+'_minutes');
+    seconds = $('#span_'+mode+'_seconds');
     button = $('#button');
-    state = state == "playing" ? 'pause' : "playing"
-    button.val = button.val == "Play" ? 'Pause' : "Play"
+    button.val(button.val() == "Play" ? 'Pause' : "Play")
     
     let totalTime = parseInt(minutes.text()) * 60 + parseInt(seconds.text());
     if(!timer){
@@ -30,22 +29,41 @@ function startTimer() {
         }, 1000);
     }
 }
-function setMode(mode){
-    if(mode == "pomodoro"){
-        $('#pomodoro-mode').addClass('active');
+function setState(){
+    state = state == "pause" ? "playing" : "pause"
+    console.log(1)
+    if(state == "playing"){
+        console.log(11)
+        $('#break-mode').addClass('disabled');
+        $('#pomodoro-mode').addClass('disabled');
+    }
+    if(state == "pause"){
+        $('#break-mode').removeClass('disabled');
+        $('#pomodoro-mode').removeClass('disabled');
+    }
+    startTimer()
+}
+function setMode(op_mode){
+    mode = op_mode
+    if(op_mode == "pomodoro"){
         $('#break-mode').removeClass('active');
+        $('#pomodoro-mode').addClass('active');
         $('#span_break_minutes').attr('id', 'span_pomodoro_minutes')
         $('#span_break_seconds').attr('id', 'span_pomodoro_seconds')
-        getDefaultTimer('pomodoro_minutes', 'span')
-        getDefaultTimer('pomodoro_seconds', 'span')
+        if(state == "pause"){
+            getDefaultTimer('pomodoro_minutes', 'span')
+            getDefaultTimer('pomodoro_seconds', 'span')
+        }
     }
-    if(mode == "break"){
+    if(op_mode == "break"){
         $('#break-mode').addClass('active');
         $('#pomodoro-mode').removeClass('active');
         $('#span_pomodoro_minutes').attr('id', 'span_break_minutes')
         $('#span_pomodoro_seconds').attr('id', 'span_break_seconds')
-        getDefaultTimer('break_minutes', 'span')
-        getDefaultTimer('break_seconds', 'span')
+        if(state == "pause"){
+            getDefaultTimer('break_minutes', 'span')
+            getDefaultTimer('break_seconds', 'span')
+        }
     }
 }
 function setDefaultTimer(key, value){
@@ -82,7 +100,6 @@ function applyChanges(key, value, origin){
     }
     if(origin == 'span'){
         value = value < 10 ? "0"+value : value;
-        console.log($('#span_'+key))
         $('#span_'+key).text(value);
     }
 }
