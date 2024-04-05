@@ -8,6 +8,7 @@ function startTimer() {
     button.val(button.val() == "Play" ? 'Pause' : "Play")
     
     let totalTime = parseInt(minutes.text()) * 60 + parseInt(seconds.text());
+    
     if(!timer){
         timer = setInterval(function() {
             if(state == "playing"){
@@ -23,7 +24,7 @@ function startTimer() {
                 seconds.text(formattedSeconds);
         
                 if (totalTime <= 0 ) {
-                    clearInterval(timer); // Parar o timer
+                    clearInterval(timer); 
                 }
             
         }, 1000);
@@ -31,9 +32,7 @@ function startTimer() {
 }
 function setState(){
     state = state == "pause" ? "playing" : "pause"
-    console.log(1)
     if(state == "playing"){
-        console.log(11)
         $('#break-mode').addClass('disabled');
         $('#pomodoro-mode').addClass('disabled');
     }
@@ -45,6 +44,10 @@ function setState(){
 }
 function setMode(op_mode){
     mode = op_mode
+    if(timer){
+        clearInterval(timer); 
+        timer = undefined
+    }
     if(op_mode == "pomodoro"){
         $('#break-mode').removeClass('active');
         $('#pomodoro-mode').addClass('active');
